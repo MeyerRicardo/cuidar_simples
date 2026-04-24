@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profissionais de Cuidado - Cuidar Simples</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../index.html">
+            <i class="fas fa-hands-helping" style="color: #2c7da0;"></i> 
+            <strong>Cuidar Simples</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="tutoriais.html">Tutoriais</a></li>
+                <li class="nav-item"><a class="nav-link" href="jogos.html">Jogos</a></li>
+                <li class="nav-item"><a class="nav-link" href="exercicios.html">Exercícios</a></li>
+                <li class="nav-item"><a class="nav-link active" href="profissionais.html">Profissionais</a></li>
+                <li class="nav-item"><a class="nav-link" href="emergencia.html">Emergência</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="container my-5 pt-4">
+    <h1 class="text-center mb-4">Encontre Profissionais de Cuidado</h1>
+    <p class="text-center mb-5">Conecte-se com cuidadores, técnicos de enfermagem e fisioterapeutas perto de você.</p>
+
+    <!-- Barra de Busca -->
+    <div class="row mb-4">
+        <div class="col-md-8 mx-auto">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Buscar por profissional, especialidade ou cidade..." aria-label="Buscar">
+                <button class="btn btn-primary" type="button" onclick="filtrarProfissionais()">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seletor de Categoria -->
+    <div class="row mb-4">
+        <div class="col-md-6 mx-auto">
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-outline-primary" onclick="filtrarCategoria('todos')">Todos</button>
+                <button class="btn btn-outline-primary" onclick="filtrarCategoria('cuidador')">Cuidadores</button>
+                <button class="btn btn-outline-primary" onclick="filtrarCategoria('enfermagem')">Téc. Enfermagem</button>
+                <button class="btn btn-outline-primary" onclick="filtrarCategoria('fisioterapeuta')">Fisioterapeutas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Profissionais (Exemplo - dados mockup) -->
+    <div id="profissionaisList">
+        <!-- Cuidador 1 -->
+        <div class="profissional-card" data-categoria="cuidador" data-nome="Maria">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-user-circle" style="font-size: 4rem; color: #2c7da0;"></i>
+                </div>
+                <div class="col-md-7">
+                    <h4>Maria Silva</h4>
+                    <p><i class="fas fa-briefcase"></i> Cuidadora de Idosos - 8 anos de experiência</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP (Zona Sul) | Distância: ~2km</p>
+                    <p><i class="fas fa-star" style="color: gold;"></i> 4.8 (23 avaliações) | Experiência com Alzheimer</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p class="h5">R$ 25/hora</p>
+                    <a href="tel:11999999999" class="btn btn-success w-100 mb-2">
+                        <i class="fas fa-phone"></i> Ligar
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#contactModal" onclick="setContact('Maria Silva', '11999999999')">
+                        <i class="fas fa-envelope"></i> Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Técnico Enfermagem 1 -->
+        <div class="profissional-card" data-categoria="enfermagem" data-nome="João">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-user-md" style="font-size: 4rem; color: #2c7da0;"></i>
+                </div>
+                <div class="col-md-7">
+                    <h4>João Santos</h4>
+                    <p><i class="fas fa-briefcase"></i> Técnico de Enfermagem - 5 anos de experiência</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP (Centro) | Distância: ~5km</p>
+                    <p><i class="fas fa-star" style="color: gold;"></i> 4.9 (45 avaliações) | Disponibilidade fins de semana</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p class="h5">R$ 40/hora</p>
+                    <a href="tel:11888888888" class="btn btn-success w-100 mb-2">
+                        <i class="fas fa-phone"></i> Ligar
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#contactModal" onclick="setContact('João Santos', '11888888888')">
+                        <i class="fas fa-envelope"></i> Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cuidador 2 -->
+        <div class="profissional-card" data-categoria="cuidador" data-nome="Ana">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-user-circle" style="font-size: 4rem; color: #2c7da0;"></i>
+                </div>
+                <div class="col-md-7">
+                    <h4>Ana Pereira</h4>
+                    <p><i class="fas fa-briefcase"></i> Cuidadora Especializada - Parkinson e Mobilidade Reduzida</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP (Zona Leste) | Distância: ~8km</p>
+                    <p><i class="fas fa-star" style="color: gold;"></i> 4.7 (18 avaliações) | Referências disponíveis</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p class="h5">R$ 30/hora</p>
+                    <a href="tel:11977777777" class="btn btn-success w-100 mb-2">
+                        <i class="fas fa-phone"></i> Ligar
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#contactModal" onclick="setContact('Ana Pereira', '11977777777')">
+                        <i class="fas fa-envelope"></i> Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fisioterapeuta -->
+        <div class="profissional-card" data-categoria="fisioterapeuta" data-nome="Carlos">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-user-md" style="font-size: 4rem; color: #2c7da0;"></i>
+                </div>
+                <div class="col-md-7">
+                    <h4>Carlos Oliveira</h4>
+                    <p><i class="fas fa-briefcase"></i> Fisioterapeuta - Especialista em Geriatria</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP (Zona Oeste) | Distância: ~6km</p>
+                    <p><i class="fas fa-star" style="color: gold;"></i> 5.0 (12 avaliações) | Atendimento domiciliar</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p class="h5">R$ 80/sessão</p>
+                    <a href="tel:11966666666" class="btn btn-success w-100 mb-2">
+                        <i class="fas fa-phone"></i> Ligar
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#contactModal" onclick="setContact('Carlos Oliveira', '11966666666')">
+                        <i class="fas fa-envelope"></i> Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão para cadastrar profissional -->
+    <div class="text-center mt-5">
+        <p>É profissional da área de cuidados?</p>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal">
+            <i class="fas fa-plus-circle"></i> Cadastrar meu serviço (gratuito)
+        </button>
+        <p class="text-muted mt-2 small">Plataforma de conexão gratuita - Projeto acadêmico UNIVESP</p>
+    </div>
+</div>
+
+<!-- MODAL DE CONTATO -->
+<div class="modal fade" id="contactModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Entrar em Contato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Você está entrando em contato com: <strong id="contatoNome"></strong></p>
+                <p>Telefone: <strong id="contatoTelefone"></strong></p>
+                <p>Copie o número e ligue pelo seu celular ou WhatsApp.</p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> A Cuidar Simples é uma plataforma de conexão gratuita. Não nos responsabilizamos pela prestação dos serviços.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE CADASTRO -->
+<div class="modal fade" id="cadastroModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar meu serviço</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Para cadastrar seu serviço, envie um e-mail para:</p>
+                <p class="text-center"><strong>cadastro@cuidarsimples.tcc</strong></p>
+                <p>Inclua no e-mail:</p>
+                <ul>
+                    <li>Nome completo</li>
+                    <li>Profissão/Categoria</li>
+                    <li>Telefone para contato</li>
+                    <li>Região de atuação</li>
+                    <li>Valor/hora (se aplicável)</li>
+                </ul>
+                <div class="alert alert-warning">
+                    Este é um protótipo acadêmico. Em uma versão real, o cadastro seria automatizado.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BOTÃO DE EMERGÊNCIA FLUTUANTE -->
+<a href="emergencia.html" class="btn-emergency-floating">
+    <i class="fas fa-phone-alt"></i> Emergência
+</a>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container text-center">
+        <p>Trabalho de Conclusão de Curso - Engenharia de Sistemas - UNIVESP</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/profissionais.js"></script>
+</body>
+</html>
